@@ -13,6 +13,26 @@ Meiloon 藍牙控制與音訊處理 SDK，專為 iOS 平台設計，提供完整
 
 ---
 
+## ⚙️ 權限設定 (Permissions)
+
+由於本 SDK 涉及藍牙設備搜尋與控制，請務必在您 App 專案的 **`Info.plist`** 中加入以下權限說明，否則 App 會在啟動或掃描時崩潰：
+
+| Key | Value (建議敘述) |
+| :--- | :--- |
+| **Privacy - Bluetooth Always Usage Description** | 本 App 需要使用藍牙以搜尋並連接 Meiloon 設備。 |
+| **Privacy - Bluetooth Peripheral Usage Description** | 本 App 需要使用藍牙與 Meiloon 設備進行通訊。 |
+ 
+若您習慣直接編輯 `Info.plist` 的 XML 源碼，請加入：
+ 
+```xml
+key>NSBluetoothAlwaysUsageDescription</key>
+<string>本 App 需要使用藍牙以搜尋並連接 Meiloon 設備。</string>
+key>NSBluetoothPeripheralUsageDescription</key>
+<string>本 App 需要使用藍牙與 Meiloon 設備進行通訊。</string>
+```
+
+---
+
 ## 🔐 隱私庫認證 (若專案為私有)
 
 若您的專案設為私有，請確保您的 Xcode 已登入具備讀取權限的 GitHub 帳號：
