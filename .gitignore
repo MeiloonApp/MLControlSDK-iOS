@@ -1,0 +1,25 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# Binaries (Moved to GitHub Releases)
+Frameworks/*.xcframework
+Frameworks/*.zip
+
+# Sensitive Info (STAY IGNORED)
+MLKey.txt
+**/MLKey.txt
+**/*.plist
+
+# Internal Tools
+InternalTools/
+
+# OS Files
+.DS_Store
+*.resolved
