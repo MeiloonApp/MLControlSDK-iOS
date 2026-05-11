@@ -3,7 +3,7 @@ import PackageDescription
 
 let user = "MeiloonApp"
 let repo = "MLControlSDK-iOS"
-let tag = "1.0.1"
+let tag = "1.0.2"
 let baseURL = "https://github.com/\(user)/\(repo)/releases/download/\(tag)"
 
 let package = Package(
@@ -26,7 +26,7 @@ let package = Package(
         .binaryTarget(
             name: "MLControlCore",
             url: "\(baseURL)/MLControlCore.xcframework.zip",
-            checksum: "a4a2927e40ace57b3a14de8bda5dfdaeff38e1c73a50b35c16f6e34583c8ee76"
+            checksum: "c4d286287a03f50bacb759c6ac115dabb4a1f645f4eb62f7b98ff2ce0c693c4c"
         ),
         .binaryTarget(
             name: "JL_BLEKit",
