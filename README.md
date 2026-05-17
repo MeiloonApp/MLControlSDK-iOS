@@ -21,6 +21,7 @@ Meiloon 藍牙控制與音訊處理 SDK，專為 iOS 平台設計，提供完整
 | :--- | :--- |
 | **Privacy - Bluetooth Always Usage Description** | 本 App 需要使用藍牙以搜尋並連接 Meiloon 設備。 |
 | **Privacy - Bluetooth Peripheral Usage Description** | 本 App 需要使用藍牙與 Meiloon 設備進行通訊。 |
+| **Privacy - Microphone Usage Description** | Use Microphone to Capture Audio |
  
 若您習慣直接編輯 `Info.plist` 的 XML 源碼，請加入：
  
@@ -29,6 +30,8 @@ key>NSBluetoothAlwaysUsageDescription</key>
 <string>本 App 需要使用藍牙以搜尋並連接 Meiloon 設備。</string>
 key>NSBluetoothPeripheralUsageDescription</key>
 <string>本 App 需要使用藍牙與 Meiloon 設備進行通訊。</string>
+key>NSMicrophoneUsageDescription</key>
+<string>Use Microphone to Capture Audio</string>
 ```
 
 ---
