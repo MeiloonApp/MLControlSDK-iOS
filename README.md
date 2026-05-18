@@ -8,8 +8,9 @@ Meiloon 藍牙控制與音訊處理 SDK，專為 iOS 平台設計，提供完整
 
 1. 在 Xcode 中選擇 **File > Add Package Dependencies...**
 2. 輸入以下網址：
-   `https://github.com/ML-SPD/MLControlSDK`
-3. 選擇 **Exact Version** 並輸入 `1.0.0` (或最新版本)。
+   `https://github.com/MeiloonApp/MLControlSDK-iOS`
+3. 選擇 **Up to Next Major Version** 並輸入 `1.0.0`。
+4. 或是選擇 **Exact Version** 並輸入 `1.0.5` (或最新版本)。
 
 ---
 
