@@ -26,7 +26,7 @@ let package = Package(
         .binaryTarget(
             name: "MLControlCore",
             url: "\(baseURL)/MLControlCore.xcframework.zip",
-            checksum: "51661458b981610b27f49318a18660ab8154677de8f403d647762f704e797302"
+            checksum: "5d242158443bd845dfa163e5c0e8baba419c909c2476d50e8702d5c608331eba"
         ),
         .binaryTarget(
             name: "JL_BLEKit",
