@@ -176,3 +176,70 @@ let response = MLPEQEngine.shared.calculateCombinedResponse(
 
 ## 📚 詳細文件
 SDK 內建 DocC 互動式手冊。您可以直接存取 [線上文件](https://meiloonapp.github.io/MLControlSDK-iOS/documentation/mlcontrolcore/)，或在 Xcode 的 **Product > Build Documentation** 中手動生成並查看更詳細的 API 說明。
+
+---
+
+## 📡 寄生模式 OTA 韌體升級 (V1.0.9)
+
+> [!IMPORTANT]
+> 寄生模式 OTA 升級功能**僅限使用 Jieli 晶片之設備支援**，非 Jieli 晶片的設備將無法執行此升級流程。
+
+Meiloon iOS SDK 支援 **「寄生模式 (Parasitic Mode)」** OTA 升級。此模式會在現有的藍牙通訊連接上，無縫接管並協商升級協議，無須主動斷開或切換連線，並支援自動重連（包括 Single Bank Loader 隨機 UUID 比對）與重啟自動同步功能。
+
+### 1. 進入升級頁面並進行預備握手
+在升級畫面載入時（如 `onAppear`），呼叫 `prepareOTA()` 進入預備接管狀態。此時 SDK 會在不發送韌體數據的情況下與設備協商，取得設備分區升級類型（例如 `Single Bank` 或 `Double Bank`），並顯示於畫面上。
+同時，請在離開升級畫面時的 `onDisappear` 呼叫 `exitOTA()`，讓藍牙核心立即恢復為一般控制通訊模式。
+
+```swift
+import SwiftUI
+import MLControlCore
+
+struct OTAUpgradeView: View {
+    // 🎯 直接監聽 MLOTAActionManager 單例
+    @ObservedObject var otaManager = MLOTAActionManager.shared
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("設備升級分區類型: \(otaManager.deviceOTAType)")
+                .bold()
+            
+            Text("進度: \(Int(otaManager.progress * 100))%")
+            Text("狀態: \(otaManager.statusMessage)")
+            
+            Button("取消升級") {
+                otaManager.cancelUpgrade()
+            }
+        }
+        .onAppear {
+            // 🎯 進入升級頁面，啟動預備接管與握手
+            otaManager.prepareOTA()
+        }
+        .onDisappear {
+            // 🎯 離開升級頁面，清除狀態並恢復為通訊模式
+            otaManager.exitOTA()
+        }
+    }
+}
+```
+
+### 2. 選擇檔案並點擊開始升級
+當使用者選取了升級韌體檔案（`.ufw`）後，調用 `executeOTA(with:)` 來傳送韌體二進位數據：
+
+```swift
+func startUpgrade(fileURL: URL) {
+    guard let data = try? Data(contentsOf: fileURL) else { return }
+    // 🎯 呼叫 executeOTA 開始數據傳輸
+    MLOTAActionManager.shared.executeOTA(with: data)
+}
+```
+
+### 3. 可選：開啟或關閉 Jieli 底層詳細日誌
+若開發期間需要除錯，可透過以下全域屬性動態開啟或關閉 Jieli 底層的詳細封包日誌（預設為 `false`，關閉底層詳細日誌與日誌檔案寫入）：
+
+```swift
+// 開啟底層封包日誌與儲存
+MLOTAActionManager.isJLExtendedLogEnabled = true
+```
+
+*最後更新：2026-06-23 | SDK 版本支援：V1.0.9+*
+
